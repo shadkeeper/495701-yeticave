@@ -1,7 +1,7 @@
 # Личный проект «YetiCave» 
 
 * Студент: [Suren Kochkonyan](https://up.htmlacademy.ru/php/3/user/495701).
-* Наставник: `Неизвестно`.
+* Наставник: [Павел Кузнецов](https://htmlacademy.ru/profile/id417075).
 
 ---
 
