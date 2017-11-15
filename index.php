@@ -136,17 +136,11 @@ $goods = [
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
-            <?
-            $index = 0;
-            $num = count($categories);
-            while ($index < $num) {
-            $cat = $categories[$index]['name']; ?>
-            <li class="promo__item promo__item--<?=$categories[$index]['class'];?>">
-                <? print ('<a class="promo__link" href ="all-lots.html">' . $cat . '</a>');
-                $index = $index + 1;
-                }
-                ?>
+            <?foreach($categories as $category) : ?>
+            <li class="promo__item promo__item--<?=$category['class'];?>">
+                <a class="promo__link" href ="all-lots.html"><?=$category['name'];?></a>
             </li>
+            <? endforeach; ?>
         </ul>
     </section>
     <section class="lots">
