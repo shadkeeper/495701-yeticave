@@ -8,18 +8,18 @@ $bets = [
     ['name' => 'Семён', 'price' => 10000, 'ts' => strtotime('last week')]
 ];
 date_default_timezone_set('Europe/Moscow');
-function timeFun($timeFun) {
+function timeFun($timefun) {
     $now = strtotime('now');
-    $Fun = ($now - $timeFun);
-    if ($Fun / 3600 < 24) {
-        if ($Fun / 3600 < 1) {
-            $tsr = date("i", $Fun) . ' минут назад';
+    $fun = ($now - $timefun) / 60;
+    if ($fun / 60 < 24) {
+        if ($fun < 60) {
+            $tsr = ceil($fun) . ' минут назад';
         } else {
-            $tsr = date("H", $Fun) . ' часов назад';
+            $tsr = ceil($fun / 60) . ' часов назад';
         }
     }
     else {
-           $tsr = date("d:m:y", $timeFun) . ' в ' . date("H:i", $timeFun);
+           $tsr = date("d:m:y", $timefun) . ' в ' . date("H:i", $timefun);
         }
     return $tsr;
 };
