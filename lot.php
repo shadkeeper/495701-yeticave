@@ -10,12 +10,12 @@ $bets = [
 date_default_timezone_set('Europe/Moscow');
 function timeFun($timeFun) {
     $now = strtotime('now');
-    $Fun = ($now - $timeFun) / 3600;
-    if ($Fun < 24) {
-        if ($Fun < 1) {
-            $tsr = date("i", $timeFun) . ' минут назад';
+    $Fun = ($now - $timeFun);
+    if ($Fun / 3600 < 24) {
+        if ($Fun / 3600 < 1) {
+            $tsr = date("i", $Fun) . ' минут назад';
         } else {
-            $tsr = date("H", $timeFun) . ' часов назад';
+            $tsr = date("H", $Fun) . ' часов назад';
         }
     }
     else {
