@@ -19,7 +19,7 @@ function timeFun($timefun) {
         }
     }
     else {
-           $tsr = date("d:m:y", $timefun) . ' в ' . date("H:i", $timefun);
+           $tsr = date("d:m:y в H:i", $timefun);
         }
     return $tsr;
 };
