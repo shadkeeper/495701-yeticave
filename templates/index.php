@@ -19,7 +19,7 @@
         <?php foreach ($goods as $good): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="<?=$good['url_img']; ?>" width="350" height="260" alt="Сноуборд">
+                    <img src="<?=$good['url_img']; ?>" width="350" height="260" alt="<?=$good['img_alt']; ?>">
                 </div>
                 <div class="lot__info">
                     <span class="lot__category"><?=$good['category']; ?></span>
