@@ -8,26 +8,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $errors = [];
     $add_lot = $_POST;
     $add_required =
-    [
-        'name',
-        'category',
-        'cost',
-        'cost_min',
-        'url_img',
-        'description',
-        'data'
-    ];
+        [
+            'name',
+            'category',
+            'cost',
+            'cost_min',
+            'url_img',
+            'description',
+            'data'
+        ];
+    $add_numeric =
+        [
+            'cost',
+            'cost_min'
+        ];
+    $add_date =
+        [
+          'date'
+        ];
 
-    foreach ($add_lot as $item => $value)
-    {
-        if (in_array($item, $add_required))
+    foreach ($add_required as $item)
         {
-            if (!$value)
-            {
-                $errors[$item] = 'Это поле нужно заполнить';
-            }
+            if (!array_key_exists($item, $add_lot) || empty($add_lot[$item]))
+                {
+                    $errors[$item] = 'Это поле нужно заполнить';
+                }
         }
-    }
+    foreach ($add_lot as $item => $value)
+        {
+            if (in_array($item, $add_required) && ($value == 'Выберите категорию'))
+                {
+                    $errors[$item] = 'Нужно выбрать категорию';
+                }
+        }
+    foreach ($add_numeric as $item)
+        {
+            if (array_key_exists($item, $add_lot) && $add_lot[$item] && !is_numeric($add_lot[$item]))
+                {
+                    $errors[$item] = 'Введите числовое значение';
+                }
+        }
+    foreach ($add_date as $item)
+        {
+            if(array_key_exists($item, $add_lot) && !is_numeric(strtotime($add_lot[$item])))
+                {
+                    $errors[$item] = 'Введите дату';
+                }
+        }
+
     if (!empty($_FILES['url_img']['name']))
     {
         $tmp_name = $_FILES['url_img']['tmp_name'];
@@ -60,7 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             [
                 'errors' => $errors,
                 'lot' => $add_lot,
-                'categories' => $categories
+                'categories' => $categories,
+                'bets' => $bets
             ]);
     }
     else
@@ -78,6 +107,7 @@ else
     $page_content = render_page('add',
         [
             'categories' => $categories,
+            'bets' => $bets
         ]);
 }
 
