@@ -7,52 +7,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $errors = [];
     $add_lot = $_POST;
-    $add_required =
-        [
-            'name',
-            'category',
-            'cost',
-            'cost_min',
-            'url_img',
-            'description',
-            'data'
-        ];
-    $add_numeric =
-        [
-            'cost',
-            'cost_min'
-        ];
-    $add_date =
-        [
-          'date'
-        ];
 
-    foreach ($add_required as $item)
+    $validation_rules =
+        [
+            'name' => ['required'],
+            'category' => ['required', 'cat'],
+            'cost' => ['required', 'numeric'],
+            'cost_min' => ['required', 'numeric'],
+            /*'url_img' => ['required'],*/
+            'description'=> ['required'],
+            'date' => ['required', 'date']
+        ];
+    foreach ($validation_rules as $valid => $rules)
         {
-            if (!array_key_exists($item, $add_lot) || empty($add_lot[$item]))
+            if (array_key_exists($valid, $add_lot))
                 {
-                    $errors[$item] = 'Это поле нужно заполнить';
+                    foreach ($rules as $rule)
+                        {
+                            switch ($rule)
+                                {
+                                case 'required' : if (empty($add_lot[$valid]) || ($add_lot[$valid] == 'Выберите категорию'))
+                                    {
+                                        $errors[$valid] = 'Это поле нужно заполнить';
+                                    }
+                                    break;
+                                case 'cat' : if ($add_lot[$valid] == 'Выберите категорию')
+                                    {
+                                        $errors[$valid] = 'Нужно выбрать категорию';
+                                    }
+                                    break;
+                                case 'numeric' : if (!is_numeric($add_lot[$valid]))
+                                    {
+                                        $errors[$valid] = 'Введите числовое значение';
+                                    }
+                                    break;
+                                case 'date' : if (!strtotime($add_lot[$valid]))
+                                    {
+                                        $errors[$valid] = 'Введите дату';
+                                    }
+                                    break;
+                                }
+
+                        }
                 }
-        }
-    foreach ($add_lot as $item => $value)
-        {
-            if (in_array($item, $add_required) && ($value == 'Выберите категорию'))
+            else
                 {
-                    $errors[$item] = 'Нужно выбрать категорию';
-                }
-        }
-    foreach ($add_numeric as $item)
-        {
-            if (array_key_exists($item, $add_lot) && $add_lot[$item] && !is_numeric($add_lot[$item]))
-                {
-                    $errors[$item] = 'Введите числовое значение';
-                }
-        }
-    foreach ($add_date as $item)
-        {
-            if(array_key_exists($item, $add_lot) && !is_numeric(strtotime($add_lot[$item])))
-                {
-                    $errors[$item] = 'Введите дату';
+                    if (in_array('required',$rules))
+                        {
+                            $errors[$valid] = 'Это поле нужно заполнить';
+                        }
                 }
         }
 
@@ -69,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         }
         elseif ($type !== 'image/png' && $type !== 'image/jpg' && $type !== 'image/jpeg')
         {
-            $errors['url_img'] = 'Изображение должно быть в формате png или jpeg';
+            $errors['url_img'] = 'Изображение должно быть в формате PNG, JPEG или JPG';
         }
         else
         {

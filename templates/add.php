@@ -52,7 +52,7 @@
         <div class="form__item form__item--small <?=isset($errors['cost_min'])? "form__item--invalid" : "";?>">
             <label for="cost_min">Шаг ставки</label>
             <input id="cost_min" type="number" name="cost_min" placeholder="0" value="<?=isset($add_lot['cost_min'])? $add_lot['cost_min'] : '';?>">
-            <span class="form__error">Введите шаг ставки</span>
+            <span class="form__error"><?=isset($errors['cost_min'])? $errors['cost_min'] : "";?></span>
         </div>
         <div class="form__item <?=isset($errors['date'])? "form__item--invalid" : "";?>">
             <label for="date">Дата окончания торгов</label>
