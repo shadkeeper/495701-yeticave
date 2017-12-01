@@ -12,21 +12,21 @@
         <div class="lot-item__right">
             <div class="lot-item__state">
                 <div class="lot-item__timer timer">
-                    10:54:12
+                    <?=$lot['date']; ?>
                 </div>
                 <div class="lot-item__cost-state">
                     <div class="lot-item__rate">
                         <span class="lot-item__amount">Текущая цена</span>
-                        <span class="lot-item__cost">11 500</span>
+                        <span class="lot-item__cost"><?=$lot['cost']; ?></span>
                     </div>
                     <div class="lot-item__min-cost">
-                        Мин. ставка <span>12 000 р</span>
+                        Мин. ставка <span><?=$lot['cost_min']; ?></span>
                     </div>
                 </div>
-                <form class="lot-item__form" action="https://echo.htmlacademy.ru" method="post">
+                <form class="lot-item__form" action="add.php" method="post">
                     <p class="lot-item__form-item">
-                        <label for="cost">Ваша ставка</label>
-                        <input id="cost" type="number" name="cost" placeholder="12 000">
+                        <label for="cost_bet">Ваша ставка</label>
+                        <input id="cost_bet" type="number" name="cost_bet" placeholder="0">
                     </p>
                     <button type="submit" class="button">Сделать ставку</button>
                 </form>
