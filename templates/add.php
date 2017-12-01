@@ -1,14 +1,17 @@
 <form class="form form--add-lot container <?=isset($errors)? 'form--invalid' : '';?>" action="add.php" method="post" enctype="multipart/form-data">
     <h2>Добавление лота</h2>
+
     <div class="form__container-two">
-        <div class="form__item form__item--invalid <?=isset($errors['name'])? "form__item--invalid" : "";?>">
+        <div class="form__item <?=isset($errors['name'])? "form__item--invalid" : "";?>">
             <label for="name">Наименование</label>
             <input id="name" type="text" name="name" placeholder="Введите наименование лота" value="<?=isset($add_lot['name'])? $add_lot['name'] : '';?>">
             <span class="form__error"><?=isset($errors['name'])? $errors['name'] : "";?></span>
         </div>
+
         <div class="form__item <?=isset($errors['category'])? "form__item--invalid" : "";?>">
             <label for="category">Категория</label>
             <select id="category" name="category">
+                    <option>Выберите категорию</option>
                 <?php foreach($categories as $category): ?>
                     <option <?=(isset($add_lot['category']) && $add_lot['category'] == $category['name'])? 'selected' : '';?>><?=$category['name'];?></option>
                 <?php endforeach; ?>
@@ -18,8 +21,8 @@
     </div>
 
     <div class="form__item form__item--wide" <?=isset($errors['description'])? "form__item--invalid" : "";?>>
-        <label for="message">Описание</label>
-        <textarea id="message" name="description" placeholder="Напишите описание лота"><?=isset($add_lot['description'])? $add_lot['description'] : '';?></textarea>
+        <label for="description">Описание</label>
+        <textarea id="description" name="description" placeholder="Напишите описание лота"><?=isset($add_lot['description'])? $add_lot['description'] : '';?></textarea>
         <span class="form__error"><?=isset($errors['description'])? $errors['description'] : "";?></span>
     </div>
 
