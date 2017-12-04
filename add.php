@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             'category' => ['required', 'cat'],
             'cost' => ['required', 'numeric'],
             'cost_min' => ['required', 'numeric'],
-            /*'url_img' => ['required'],*/
             'description'=> ['required'],
             'date' => ['required', 'date']
         ];
@@ -26,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                         {
                             switch ($rule)
                                 {
-                                case 'required' : if (empty($add_lot[$valid]) || ($add_lot[$valid] == 'Выберите категорию'))
+                                case 'required' : if (empty($add_lot[$valid]))
                                     {
                                         $errors[$valid] = 'Это поле нужно заполнить';
                                     }
