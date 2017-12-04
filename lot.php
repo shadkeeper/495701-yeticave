@@ -28,7 +28,8 @@ $layout_content = render_page('layout',
     	'user_name' => $user_name,
     	'user_avatar' => $user_avatar,
 		'content' => $page_content,
-		'title' => 'Лот №' . $lot['id'] . ' - ' . $lot['name']
+		'title' => 'Лот №' . $lot['id'] . ' - ' . $lot['name'],
+		'navigation' => render_page('navigation', ['categories' => $categories])
 	]);
 
 print($layout_content);

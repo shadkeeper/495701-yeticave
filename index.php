@@ -16,7 +16,8 @@ $layout_content = render_page('layout',
         'user_name' => $user_name,
         'user_avatar' => $user_avatar,
         'title' => 'Главная',
-        'content' => $page_content
+        'content' => $page_content,
+        'navigation' => render_page('navigation', ['categories' => $categories])
     ]
 );
 
