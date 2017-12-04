@@ -20,6 +20,7 @@ function render_page($tpl, $massive = null)
 };
 
 date_default_timezone_set('Europe/Moscow');
+
 function timeFun($timefun)
 {
     $now = strtotime('now');
