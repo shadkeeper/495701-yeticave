@@ -14,7 +14,7 @@ $page_content = render_page ('add_my_bets',
     [
         'add_my_bets_massive' => $add_my_bets_massive,
         'categories' => $categories,
-        'goods' => $goods,
+        'goods' => $goods
     ]);
 
 $layout_content = render_page ('layout',
@@ -28,3 +28,5 @@ $layout_content = render_page ('layout',
     ]);
 
 print ($layout_content);
+
+?>

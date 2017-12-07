@@ -6,15 +6,15 @@
                 <tr class="rates__item">
                     <td class="rates__info">
                         <div class="rates__img">
-                            <img src="<?=$bet['img_url']; ?>" width="54" height="40" alt="">
+                            <img src="<?=$goods[$item]['url_img']; ?>" width="54" height="40" alt="">
                         </div>
-                        <h3 class="rates__title"><a href="/lot.php?lot_id=<?=$item ?>"><?=$bet['name']; ?></a></h3>
+                        <h3 class="rates__title"><a href="lot.php?id=<?=$item ?>"><?=$goods[$item]['name']; ?></a></h3>
                     </td>
                     <td class="rates__category">
-                        <?=$bet['category']; ?>
+                        <?=$goods[$item]['category']; ?>
                     </td>
                     <td class="rates__timer">
-                        <div class="timer"><?=timeEnd($bet['lot_end_date']);?></div>
+                        <div class="timer"><?=timeEnd($goods[$item]['date']);?></div>
                     </td>
                     <td class="rates__price">
                         <?=$bet['cost']; ?> р

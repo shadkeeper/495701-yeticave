@@ -7,10 +7,12 @@ $lot = (isset($_GET['id']) && isset($goods[$_GET['id']])) ? $goods[$_GET['id']] 
 
 if (!$lot) {
     http_response_code(404);
+    exit();
 }
 
 $bet_add = true;
-$bet_error = [];
+$bet_error = null;
+$add_my_bets_massive = null;
 
 if(isset($_COOKIE['add_my_bets']))
 {
@@ -26,17 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     {
         $bet_new =
             [
-                'name' => $lot['name'],
-                'category' => $lot['category'],
                 'cost' => $_POST['cost'],
-                'url_img' => $lot['url_img'],
                 'id' => $_GET['id'],
-                'lot_end_date' => $lot['date'],
                 'bet_date' => strtotime('now'),
             ];
         $add_my_bets_massive[$_GET['id']] = $bet_new;
         setcookie('add_my_bets', json_encode($add_my_bets_massive), time() + (86400 * 30), '/');
         header('Location: add_my_bets.php');
+        exit();
     } else {
         $bet_error = 'Ставка доджна быть не меньше минимальной ставки';
     }
@@ -57,7 +56,7 @@ $layout_content = render_page('layout',
     	'user_name' => $user_name,
     	'user_avatar' => $user_avatar,
 		'content' => $page_content,
-		'title' => 'Лот №' . $lot['id'] . ' - ' . $lot['name'],
+		'title' => 'Лот' . $lot['name'],
 		'navigation' => render_page('navigation', ['categories' => $categories])
 	]);
 
