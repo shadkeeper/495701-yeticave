@@ -4,7 +4,7 @@
     <div class="lot-item__content">
         <div class="lot-item__left">
             <div class="lot-item__image">
-                <img src="<?=$lot['url_img']; ?>" width="730" height="548" alt="<?=$lot['img_alt']; ?>">
+                <img src="<?=$lot['url_img']; ?>" width="730" height="548" alt="">
             </div>
             <p class="lot-item__category">Категория: <span><?=$lot['category']; ?></span></p>
             <p class="lot-item__description"><?=$lot['description']; ?></p>
@@ -12,7 +12,7 @@
         <div class="lot-item__right">
             <div class="lot-item__state">
                 <div class="lot-item__timer timer">
-                    <?=$lot['date']; ?>
+                    <?=timeEnd($lot['date']);?>
                 </div>
                 <div class="lot-item__cost-state">
                     <div class="lot-item__rate">
@@ -23,16 +23,19 @@
                         Мин. ставка <span><?=$lot['cost_min']; ?></span>
                     </div>
                 </div>
-                <form class="lot-item__form" action="add.php" method="post">
-                    <p class="lot-item__form-item">
-                        <label for="cost_bet">Ваша ставка</label>
-                        <input id="cost_bet" type="number" name="cost_bet" placeholder="0">
+                <?php if($bet_add): ?>
+                <form class="lot-item__form" method="post">
+                    <p class="lot-item__form-item <?=isset($bet_error)? "form__item--invalid" : "";?>">
+                        <label for="cost">Ваша ставка</label>
+                        <input id="cost" type="number" name="cost" placeholder="<?=$lot['cost_min'];?>">
                     </p>
                     <button type="submit" class="button">Сделать ставку</button>
+                    <span class="form__error"><?=isset($bet_error)? $bet_error : "";?></span>
                 </form>
+                <?php endif; ?>
             </div>
             <div class="history">
-                <h3>История ставок (<span>4</span>)</h3>
+                <h3>История ставок (<span><?=count($bets)?></span>)</h3>
                 <table class="history__list">
                     <?php foreach ($bets as $bet): ?>
                         <tr class="history__item">

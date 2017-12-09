@@ -38,4 +38,16 @@ function timeFun($timefun)
     return $tsr;
 };
 
+function timeEnd($date)
+{
+    $end_date = strtotime($date);
+    $now = strtotime('now');
+    $remainingSeconds = $end_date - $now;
+    $days = floor(($remainingSeconds / 86400));
+    $hours = floor(($remainingSeconds % 86400) / 3600);
+    $minutes = floor(($remainingSeconds % 3600) / 60);
+    $time_end = $days . ":" . $hours . ":" . $minutes;
+    return $time_end;
+}
+
 ?>

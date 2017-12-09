@@ -49,7 +49,8 @@
 
 <main class="container">
 
-    <?=$content;?>
+    <?=$navigation; ?>
+    <?=$content; ?>
 
 </main>
 
