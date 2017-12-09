@@ -12,11 +12,11 @@ if (!$lot) {
 
 $bet_add = true;
 $bet_error = null;
-$add_my_bets_massive = null;
+$add_my_bets_massive = [];
 
-if(isset($_COOKIE['add_my_bets']))
+if(isset($_COOKIE['mylots']))
 {
-    $add_my_bets_massive = json_decode($_COOKIE['add_my_bets'], true);
+    $add_my_bets_massive = json_decode($_COOKIE['mylots'], true);
     if(array_key_exists($_GET['id'], $add_my_bets_massive))
     {
         $bet_add = false;
@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'bet_date' => strtotime('now'),
             ];
         $add_my_bets_massive[$_GET['id']] = $bet_new;
-        setcookie('add_my_bets', json_encode($add_my_bets_massive), time() + (86400 * 30), '/');
-        header('Location: add_my_bets.php');
+        setcookie('mylots', json_encode($add_my_bets_massive), time() + (86400 * 30), '/');
+        header('Location: mylots.php');
         exit();
     } else {
         $bet_error = 'Ставка доджна быть не меньше минимальной ставки';

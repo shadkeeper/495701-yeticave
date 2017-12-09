@@ -5,12 +5,12 @@ include ('data.php');
 
 $add_my_bets_massive = [];
 
-if(isset($_COOKIE['add_my_bets']))
+if(isset($_COOKIE['mylots']))
 {
-    $add_my_bets_massive = json_decode($_COOKIE['add_my_bets'], true);
+    $add_my_bets_massive = json_decode($_COOKIE['mylots'], true);
 }
 
-$page_content = render_page ('add_my_bets',
+$page_content = render_page ('mylots',
     [
         'add_my_bets_massive' => $add_my_bets_massive,
         'categories' => $categories,
