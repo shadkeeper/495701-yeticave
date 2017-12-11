@@ -6,31 +6,76 @@ require ('userdata.php');
 
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
     $form = $_POST;
-    $required = ['email', 'password'];
+    $required =
+        [
+            'email' => ['email', 'required'],
+            'password' => ['password', 'required']
+        ];
     $errors = [];
+
+    foreach ($required as $valid => $rules)
+    {
+        if (array_key_exists($valid, $form))
+        {
+            foreach ($rules as $rule)
+            {
+                switch ($rule)
+                {
+                    case 'required' : if (empty($form[$valid]))
+                    {
+                        $errors[$valid] = 'Заполните поле';
+                    }
+                    break;
+                    case 'email' : if ($user = !validateUser($form[$valid], $users))
+                    {
+                        $errors[$valid] = 'Пользователь не найден';
+                    }
+                    break;
+                    case 'password' : if (!password_verify($form[$valid], $user['password']))
+                    {
+                        $errors[$valid] = 'Неверный пароль';
+                    }
+                    else
+                    {
+                        $_SESSION['user'] = $user;
+                    }
+
+                }
+            }
+        }
+    }
+/*
     foreach ($required as $name)
     {
         if (!array_key_exists($name, $form) || empty($form[$name]))
         {
-            $errors[$name] = 'Введите свое имя';
+            $errors[$name] = 'Заполните поле';
         }
     }
-    if (!empty($form['email'])) {
-        if ($user = validateUser($form['email'], $users)) {
-            if (password_verify($form['password'], $user['password'])) {
+    if (!empty($form['email']))
+    {
+        if ($user = validateUser($form['email'], $users))
+        {
+            if (password_verify($form['password'], $user['password']))
+            {
                 $_SESSION['user'] = $user;
             }
-            else if (!empty($form['password'])) {
+            else if (!empty($form['password']))
+            {
                 $errors['password'] = 'Неверный пароль';
             }
         }
-        else {
+        else
+        {
             $errors['email'] = 'Пользователь не найден';
         }
     }
-    if (count($errors)) {
+*/
+    if (count($errors))
+    {
         $page_content = render_page('login',
             [
                 'form' => $form,
@@ -38,12 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 'categories' => $categories,
             ]);
     }
-    else {
+    else
+    {
         header("Location: index.php");
         exit();
     }
 }
-else {
+else
+{
     $page_content = render_page('login',
         [
             'categories' => $categories,
