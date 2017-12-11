@@ -3,6 +3,13 @@
 require ('functions.php');
 require ('data.php');
 
+session_start();
+
+if (!isset($_SESSION['user']))
+{
+    http_response_code(403);
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
     $errors = [];
@@ -115,9 +122,6 @@ else
 
 $layout_content = render_page('layout',
 [
-    'is_auth' => $is_auth,
-    'user_name' => $user_name,
-    'user_avatar' => $user_avatar,
     'content' => $page_content,
     'title' => 'Добавить лот',
     'navigation' => render_page('navigation', ['categories' => $categories])

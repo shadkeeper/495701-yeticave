@@ -3,6 +3,8 @@
 require ('data.php');
 require ('functions.php');
 
+session_start();
+
 $page_content = render_page('index',
     [
         'categories' => $categories,
@@ -12,9 +14,6 @@ $page_content = render_page('index',
 
 $layout_content = render_page('layout',
     [
-        'is_auth' => $is_auth,
-        'user_name' => $user_name,
-        'user_avatar' => $user_avatar,
         'title' => 'Главная',
         'content' => $page_content,
         'navigation' => render_page('navigation', ['categories' => $categories])

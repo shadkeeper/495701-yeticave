@@ -4,12 +4,13 @@
     <div class="lot-item__content">
         <div class="lot-item__left">
             <div class="lot-item__image">
-                <img src="<?=$lot['url_img']; ?>" width="730" height="548" alt="">
+                <img src="<?=$lot['url_img']; ?>" width="730" height="548" alt="<?=$lot['img_alt']; ?>">
             </div>
             <p class="lot-item__category">Категория: <span><?=$lot['category']; ?></span></p>
             <p class="lot-item__description"><?=$lot['description']; ?></p>
         </div>
         <div class="lot-item__right">
+            <?php if (isset($_SESSION['user'])): ?>
             <div class="lot-item__state">
                 <div class="lot-item__timer timer">
                     <?=timeEnd($lot['date']);?>
@@ -34,6 +35,7 @@
                 </form>
                 <?php endif; ?>
             </div>
+            <?php endif; ?>
             <div class="history">
                 <h3>История ставок (<span><?=count($bets)?></span>)</h3>
                 <table class="history__list">

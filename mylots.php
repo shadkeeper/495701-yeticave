@@ -3,6 +3,8 @@
 include ('functions.php');
 include ('data.php');
 
+session_start();
+
 $add_my_bets_massive = [];
 
 if(isset($_COOKIE['mylots']))
@@ -19,9 +21,6 @@ $page_content = render_page ('mylots',
 
 $layout_content = render_page ('layout',
     [
-        'is_auth' => $is_auth,
-        'user_name' => $user_name,
-        'user_avatar' => $user_avatar,
         'title' => 'Мои ставки',
         'content' => $page_content,
         'navigation' => render_page('navigation', ['categories' => $categories])

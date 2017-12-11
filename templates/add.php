@@ -1,3 +1,5 @@
+<?php if (isset($_SESSION['user'])): ?>
+
 <form class="form form--add-lot container <?=isset($errors)? 'form--invalid' : '';?>" action="add.php" method="post" enctype="multipart/form-data">
     <h2>Добавление лота</h2>
 
@@ -64,3 +66,9 @@
     <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
     <button type="submit" class="button">Добавить лот</button>
 </form>
+
+<?php else: ?>
+<section class="lot-item container">
+    <h1>Авторизируйтесь для просмотра данной страницы</h1>
+</section>
+<?php endif; ?>

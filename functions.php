@@ -50,4 +50,18 @@ function timeEnd($date)
     return $time_end;
 }
 
+function validateUser($email, $users)
+{
+    $user_seach = null;
+    foreach ($users as $user)
+    {
+        if ($user['email'] == $email)
+        {
+            $user_seach = $user;
+            break;
+        }
+    }
+    return $user_seach;
+}
+
 ?>

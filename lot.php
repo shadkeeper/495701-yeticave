@@ -3,6 +3,8 @@
 require ('data.php');
 require ('functions.php');
 
+session_start();
+
 $lot = (isset($_GET['id']) && isset($goods[$_GET['id']])) ? $goods[$_GET['id']] : null;
 
 if (!$lot) {
@@ -52,9 +54,6 @@ $page_content = render_page ('lot',
 
 $layout_content = render_page('layout',
 	[
-    	'is_auth' => $is_auth,
-    	'user_name' => $user_name,
-    	'user_avatar' => $user_avatar,
 		'content' => $page_content,
 		'title' => 'Лот' . $lot['name'],
 		'navigation' => render_page('navigation', ['categories' => $categories])
